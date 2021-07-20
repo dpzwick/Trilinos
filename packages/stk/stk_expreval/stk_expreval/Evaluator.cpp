@@ -1106,6 +1106,20 @@ Eval::is_variable(const std::string& variableName) const
   return (variableMap.count(variableName) > 0);
 }
 
+bool
+Eval::is_scalar(const std::string& variableName) const
+{
+  auto& variableMap = m_variableMap.getMyThreadEntry();
+  auto variableIterator = variableMap.find(variableName);
+
+  if (variableIterator == variableMap.end()) { 
+    return false; 
+  }
+  
+  int variableLength = variableIterator->second->getLength();
+  return variableLength == 1 || variableLength == std::numeric_limits<int>::max();  
+}
+
 std::vector<std::string> 
 Eval::get_variable_names() const
 {

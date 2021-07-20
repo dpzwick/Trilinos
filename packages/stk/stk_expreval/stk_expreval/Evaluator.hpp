@@ -122,6 +122,8 @@ public:
   bool is_constant_expression() const;
 
   bool is_variable(const std::string& variableName) const; 
+
+  bool is_scalar(const std::string& variableName) const;
  
   std::vector<std::string> get_variable_names() const;
 
