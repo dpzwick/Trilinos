@@ -56,7 +56,7 @@
 #include "stk_util/util/ReportHandler.hpp"  // for ThrowAssert, etc
 namespace Ioss { class Property; }
 namespace Ioss { class Region; }
-namespace boost { class any; }
+//namespace boost { class any; }
 namespace stk { namespace io { class InputFile; } }
 namespace stk { namespace mesh { class FieldBase; } }
 namespace stk { namespace mesh { class MetaData; } }
@@ -90,26 +90,30 @@ public:
     ~Heartbeat() {};
 
     void define_global_ref(const std::string &variableName,
-                           const boost::any *value,
+			   //                           const boost::any *value,
+                           const std::any *value,			   
                            stk::util::ParameterType::Type type,
                            int copies = 1,
                            Ioss::Field::RoleType role = Ioss::Field::TRANSIENT);
 
     void define_global_ref(const std::string &name,
-                           const boost::any *value,
+			   //                           const boost::any *value,
+                           const std::any *value,			   
                            const std::string &storage,
                            Ioss::Field::BasicType dataType,
                            int copies = 1,
                            Ioss::Field::RoleType role = Ioss::Field::TRANSIENT);
 
     void add_global_ref(const std::string &variableName,
-                        const boost::any *value,
+			//                        const boost::any *value,
+                        const std::any *value,			
                         stk::util::ParameterType::Type type,
                         int copies = 1,
                         Ioss::Field::RoleType role = Ioss::Field::TRANSIENT);
 
     void add_global_ref(const std::string &name,
-                        const boost::any *value,
+			//                        const boost::any *value,
+                        const std::any *value,			
                         const std::string &storage,
                         Ioss::Field::BasicType dataType,
                         int copies = 1,

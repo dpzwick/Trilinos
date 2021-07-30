@@ -45,6 +45,7 @@
 #include <string>                        // for string, operator<, etc
 #include <utility>                       // for pair
 #include <vector>                        // for vector
+#include <any>                           // for any without boost
 #include "Ioss_EntityType.h"             // for EntityType
 #include "Ioss_GroupingEntity.h"
 #include "stk_mesh/base/FieldState.hpp"  // for FieldState
@@ -98,12 +99,14 @@ stk::mesh::EntityRank get_entity_rank(const Ioss::GroupingEntity *entity,
                                       const stk::mesh::MetaData &meta);
 
 struct GlobalAnyVariable {
-  GlobalAnyVariable(const std::string &name, const boost::any *value, stk::util::ParameterType::Type type)
+  //  GlobalAnyVariable(const std::string &name, const boost::any *value, stk::util::ParameterType::Type type)  
+  GlobalAnyVariable(const std::string &name, const std::any *value, stk::util::ParameterType::Type type)
     : m_name(name), m_value(value), m_type(type)
   {}
 
   std::string m_name;
-  const boost::any *m_value;
+  //  const boost::any *m_value;
+  const std::any *m_value;
   stk::util::ParameterType::Type m_type;
 };
 

@@ -1175,9 +1175,13 @@ namespace Tpetra {
       // source Map.  getRemoteIndexList() gives each of these a
       // process ID of -1.
 
+      //      const size_type numInvalidRemote =
+      //	std::count_if (remoteProcIDs.begin (), remoteProcIDs.end (),
+      //		       std::bind1st (std::equal_to<int> (), -1));
       const size_type numInvalidRemote =
-        std::count_if (remoteProcIDs.begin (), remoteProcIDs.end (),
-                       std::bind1st (std::equal_to<int> (), -1));
+      	std::count_if (remoteProcIDs.begin (), remoteProcIDs.end (),
+      		       std::bind (std::equal_to<int> (), -1, std::placeholders::_1));      
+
       TEUCHOS_TEST_FOR_EXCEPTION_CLASS_FUNC
         (numInvalidRemote == 0, std::logic_error, "Calling getRemoteIndexList "
          "on the source Map returned IDNotPresent, but none of the returned "

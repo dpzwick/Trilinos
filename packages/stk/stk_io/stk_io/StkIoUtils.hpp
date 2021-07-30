@@ -40,6 +40,7 @@
 #include <map>                                            // for map, etc
 #include <string>                                         // for string, etc
 #include <vector>                                         // for vector
+#include <any>                                            // for any without boost
 #include "stk_mesh/base/Types.hpp"                        // for EntityRank, etc
 #include "stk_mesh/base/SideSetUtil.hpp"
 #include "stk_mesh/baseImpl/elementGraph/GraphTypes.hpp"
@@ -107,7 +108,8 @@ get_parameter_type_from_field_representation(const std::string &storage,
 
 std::pair<size_t, Ioss::Field::BasicType>
 get_io_parameter_size_and_type(const stk::util::ParameterType::Type type,
-                               const boost::any &value);
+			       //                               const boost::any &value);
+                               const std::any &value);			       
 
 void superset_mesh_parts(const stk::mesh::Part& part, stk::mesh::PartVector& supersetParts);
 

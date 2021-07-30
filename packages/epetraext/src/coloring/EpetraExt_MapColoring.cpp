@@ -59,6 +59,7 @@
 #include <vector>
 #include <set>
 #include <map>
+#include <random>
 
 using std::vector;
 using std::set;
@@ -174,6 +175,8 @@ Toperator( OriginalTypeRef orig  )
 
     ColorMap = new Epetra_MapColoring( ColMap );
 
+    std::random_device rd;
+    std::mt19937 generator(rd());
     std::vector<int> rowOrder( nCols );
     if( reordering_ == 0 || reordering_ == 1 )
     {
@@ -199,8 +202,10 @@ Toperator( OriginalTypeRef orig  )
       for( int i = 0; i < nCols; ++i )
         rowOrder[ i ] = i;
 #ifndef TFLOP
-      std::random_shuffle( rowOrder.begin(), rowOrder.end() );
+      //      std::random_shuffle( rowOrder.begin(), rowOrder.end() );
+      std::shuffle(rowOrder.begin(), rowOrder.end(), generator);
 #endif
+      // LGRTODO replace random_shuffle with shuffle      
     }
 
     wTime1 = timer.WallTime();
@@ -609,7 +614,9 @@ Toperator( OriginalTypeRef orig  )
       for( int i = 0; i < nRows; ++i )
         rowOrder[i] = i;
 #ifdef TFLOP
-      random_shuffle( rowOrder.begin(), rowOrder.end() );
+      //      random_shuffle( rowOrder.begin(), rowOrder.end() );
+      std::shuffle(rowOrder.begin(), rowOrder.end(), generator);
+      // LGRTODO replace random_shuffle with shuffle
 #endif
     }
 
