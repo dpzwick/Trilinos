@@ -39,16 +39,8 @@
 #include <stk_expreval/Function.hpp>
 #include <stk_expreval/Constants.hpp>
 
-#include <boost/math/distributions.hpp>
-
 namespace stk {
 namespace expreval {
-
-  namespace bmp  = boost::math::policies;
-
-  using weibull_dist = boost::math::weibull_distribution< double, bmp::policy< bmp::overflow_error<bmp::ignore_error> > >;
-  using gamma_dist   = boost::math::gamma_distribution< double, bmp::policy< bmp::overflow_error<bmp::ignore_error> > >;
-  using normal_dist  = boost::math::normal_distribution< double, bmp::policy< bmp::overflow_error<bmp::ignore_error> > >;
 
 extern "C" {
   typedef double (*CExtern0)();
@@ -473,15 +465,13 @@ extern "C" {
   /// Weibull distribution probability distribution function.
   double weibull_pdf(double x, double shape, double scale)
   {
-    weibull_dist weibull1(shape, scale);
-    return boost::math::pdf(weibull1, x);
+    throw std::runtime_error("Weibull doesn't work without Boost!");
   }
 
   /// Normal (Gaussian) distribution probability distribution function.
   double normal_pdf(double x, double mean, double standard_deviation)
   {
-    normal_dist normal1(mean, standard_deviation);
-    return boost::math::pdf(normal1, x);
+    throw std::runtime_error("Normal doesn't work without Boost!");
   }
 
   /// Exponential Uniform distribution probability distribution function
@@ -499,7 +489,7 @@ extern "C" {
   /// Gamma continuous probability distribution function.
   double gamma_pdf(double x, double shape, double scale)
   {
-    return boost::math::pdf(gamma_dist(shape,scale), x);
+    throw std::runtime_error("Gamma doesn't work without Boost!");
   }
 
   /// Returns -1 or 1 depending on whether x is negative or positive.
